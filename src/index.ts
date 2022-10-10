@@ -1,5 +1,5 @@
 // ====< Imports >====
-import { Client, GatewayIntentBits } from "discord.js";
+import { ActivityType, Client, GatewayIntentBits } from "discord.js";
 import signale from "signale";
 
 // ====< dotenv setup >====
@@ -25,6 +25,17 @@ const client = new Client({
 // ====< Report on login >====
 client.once("ready", () => {
     signale.success("Bot is ready!");
+
+    // Set presence
+    client.user?.setPresence({
+        status: "online",
+        activities: [
+            {
+                name: "Dołącz do UKI",
+                type: ActivityType.Playing,
+            },
+        ],
+    });
 });
 
 // ====< Login >====

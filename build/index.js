@@ -44,7 +44,18 @@ const client = new discord_js_1.Client({
 });
 // ====< Report on login >====
 client.once("ready", () => {
+    var _a;
     signale_1.default.success("Bot is ready!");
+    // Set presence
+    (_a = client.user) === null || _a === void 0 ? void 0 : _a.setPresence({
+        status: "online",
+        activities: [
+            {
+                name: "Dołącz do UKI",
+                type: discord_js_1.ActivityType.Playing,
+            },
+        ],
+    });
 });
 // ====< Login >====
 client.login(process.env.TOKEN);
