@@ -15,21 +15,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-// ====< Imports >====
-const decorators_1 = require("../framework/decorators");
 const classes_1 = require("../framework/classes");
-// ====< Command implementation >====
-let PingCommand = class PingCommand extends classes_1.BaseCommand {
-    execute(interaction) {
+const decorators_1 = require("../framework/decorators");
+// ====< Handler >====
+let MessageCreateEvent = class MessageCreateEvent extends classes_1.BaseEvent {
+    handle(msg) {
         return __awaiter(this, void 0, void 0, function* () {
-            // Reply user with 'pong!'
-            yield interaction.reply({
-                content: "pong!",
-                ephemeral: true,
-            });
+            console.log(msg.content);
         });
     }
 };
-PingCommand = __decorate([
-    (0, decorators_1.Command)({ name: "ping", description: 'Replies you with "pong"' })
-], PingCommand);
+MessageCreateEvent = __decorate([
+    (0, decorators_1.Event)({ event: "messageCreate" })
+], MessageCreateEvent);

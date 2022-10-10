@@ -24,12 +24,17 @@ let EchoCommand = class EchoCommand extends classes_1.BaseCommand {
         return __awaiter(this, void 0, void 0, function* () {
             // Reply user with their message
             yield interaction.reply({
-                content: classes_1.BaseCommand.getString(interaction, "input")
+                content: classes_1.BaseCommand.getString(interaction, "input"),
             });
         });
     }
 };
 EchoCommand = __decorate([
-    (0, decorators_1.Command)({ name: 'echo', description: 'Replies you with your input' }),
-    (0, decorators_1.Option)({ name: 'input', description: 'Text to send you back', type: decorators_1.OptionType.STRING, required: true })
+    (0, decorators_1.Command)({ name: "echo", description: "Replies you with your input" }),
+    (0, decorators_1.Option)({
+        name: "input",
+        description: "Text to send you back",
+        type: decorators_1.OptionType.STRING,
+        required: true,
+    })
 ], EchoCommand);

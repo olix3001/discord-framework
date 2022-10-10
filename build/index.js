@@ -35,16 +35,22 @@ dotenv.config();
 // ====< Imports with dotenv >====
 const registers_1 = require("./framework/registers");
 // ====< Creating Instance >====
-const client = new discord_js_1.Client({ intents: [
-        discord_js_1.GatewayIntentBits.Guilds
-    ] });
+const client = new discord_js_1.Client({
+    intents: [
+        discord_js_1.GatewayIntentBits.Guilds,
+        discord_js_1.GatewayIntentBits.GuildMessages,
+        discord_js_1.GatewayIntentBits.MessageContent,
+    ],
+});
 // ====< Report on login >====
-client.once('ready', () => {
-    signale_1.default.success('Bot is ready!');
+client.once("ready", () => {
+    signale_1.default.success("Bot is ready!");
 });
 // ====< Login >====
 client.login(process.env.TOKEN);
 // ====< Tests >====
-(0, registers_1.registerDirectory)('commands');
-registers_1.CommandRegistry.getInstance().registerCommandsOnGuild('1028665063768330310');
+(0, registers_1.registerDirectory)("commands");
+registers_1.CommandRegistry.getInstance().registerCommandsOnGuild("1028665063768330310");
 registers_1.CommandRegistry.getInstance().listenForCommands(client);
+(0, registers_1.registerDirectory)("events");
+registers_1.EventRegistry.getInstance().listenForEvents(client);

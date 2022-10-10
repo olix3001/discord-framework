@@ -3,7 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Option = exports.OptionType = exports.Command = void 0;
+exports.Option = exports.OptionType = exports.Command = exports.Event = void 0;
 // ====< Imports >====
 const discord_js_1 = require("discord.js");
 const signale_1 = __importDefault(require("signale"));
@@ -18,6 +18,15 @@ function getBuilder(target) {
     }
     return builder;
 }
+function Event(options) {
+    return function (target) {
+        // Instantiate event handler
+        const handler = new target();
+        // register event listener
+        registers_1.EventRegistry.getInstance().registerHandler(options.event, handler.handle);
+    };
+}
+exports.Event = Event;
 function Command(options) {
     return function (target) {
         // Create slash command builder
@@ -29,7 +38,7 @@ function Command(options) {
         classes_1.BaseCommand.builders.set(target, builder);
         registers_1.CommandRegistry.getInstance().registerBuilder({
             builder: builder,
-            handler: t.execute
+            handler: t.execute,
         });
         // Log command creation
         signale_1.default.success(`Registered command '${options.name}'`);
@@ -47,7 +56,7 @@ function Option(options) {
         // Add option
         switch (options.type) {
             case OptionType.STRING:
-                builder.addStringOption(option => option
+                builder.addStringOption((option) => option
                     .setName(options.name)
                     .setDescription(options.description)
                     .setRequired(options.required || false));
@@ -57,4 +66,4 @@ function Option(options) {
     };
 }
 exports.Option = Option;
-// TODO: Guard, Subcommand
+// TODO: Guard (Role, Permission), Subcommand

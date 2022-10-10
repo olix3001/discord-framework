@@ -9,13 +9,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.BaseCommand = void 0;
+exports.BaseEvent = exports.BaseCommand = void 0;
 // ====< Command class >====
 class BaseCommand {
     // Methods
     constructor() { }
     execute(interaction) {
-        return __awaiter(this, void 0, void 0, function* () { throw '"execute" is not implemented on "BaseCommand" class'; });
+        return __awaiter(this, void 0, void 0, function* () {
+            throw '"execute" is not implemented on "BaseCommand" class';
+        });
     }
     // ==< Arguments >==
     static getString(interaction, name) {
@@ -24,5 +26,17 @@ class BaseCommand {
     }
 }
 exports.BaseCommand = BaseCommand;
-// Variables    
+// Variables
 BaseCommand.builders = new Map();
+// ====< Event class >====
+class BaseEvent {
+    // Variables
+    // Methods
+    constructor() { }
+    handle(event) {
+        return __awaiter(this, void 0, void 0, function* () {
+            throw '"handle" is not implemented on "BaseEvent" class';
+        });
+    }
+}
+exports.BaseEvent = BaseEvent;
